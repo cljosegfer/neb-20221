@@ -76,4 +76,3 @@ axs[1, 1].axes.get_xaxis().set_visible(False)
 axs[1, 1].axes.get_yaxis().set_visible(False)
 
 plt.savefig('fig/ex22.png')
-

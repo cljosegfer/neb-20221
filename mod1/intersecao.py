@@ -18,12 +18,17 @@ def limitado(a, b):
     return np.maximum(0, a + b - 1)
 
 def drastico(a, b):
-    mu = np.zeros(len(a))
-    for i in range(len(a)):
-        if a[i] == 1:
-            mu[i] = b[i]
-        elif b[i] == 1:
-            mu[i] = a[i]
-        else:
-            continue
+    mu = np.ones(shape = a.shape)
+    # for i in range(len(a)):
+    #     if a[i] == 1:
+    #         mu[i] = b[i]
+    #     elif b[i] == 1:
+    #         mu[i] = a[i]
+    #     else:
+    #         continue
+    azero = (a == 1) # era pra chamar aum, ne? mas aproveitei do uniao xd
+    bzero = (b == 1)
+    mu[azero] = b[azero]
+    mu[bzero] = a[bzero]
+    
     return mu
