@@ -18,7 +18,7 @@ def limitado(a, b):
     return np.maximum(0, a + b - 1)
 
 def drastico(a, b):
-    mu = np.ones(shape = a.shape)
+    mu = np.zeros(shape = a.shape)
     # for i in range(len(a)):
     #     if a[i] == 1:
     #         mu[i] = b[i]
