@@ -54,27 +54,26 @@ surf_limitada = limitada(A, B)
 surf_drastica = drastica(A, B)
 
 # plot
-# fig = plt.figure()
-# ax = fig.add_subplot(2, 1, 1, projection='3d')
 fig, axs = plt.subplots(2, 2)
-axs[0, 0].plot_surface(A, B, surf_maximo, cmap=cm.coolwarm,
-                       linewidth=0, antialiased=False)
-axs[0, 0].set_zlabel('maximo')
+axs[0, 0].imshow(surf_maximo, cmap = 'gray')
+axs[0, 0].set_title('maximo')
+axs[0, 0].axes.get_xaxis().set_visible(False)
+axs[0, 0].axes.get_yaxis().set_visible(False)
 
-# ax = fig.add_subplot(2, 1, 2, projection='3d')
-# surf = ax.plot_surface(A, B, surf_probabilistica, cmap=cm.coolwarm,
-#                         linewidth=0, antialiased=False)
-# ax.set_zlabel('probabilistica')
+axs[0, 1].imshow(surf_probabilistica, cmap = 'gray')
+axs[0, 1].set_title('probabilistica')
+axs[0, 1].axes.get_xaxis().set_visible(False)
+axs[0, 1].axes.get_yaxis().set_visible(False)
 
-# ax = fig.add_subplot(2, 2, 1, projection='3d')
-# surf = ax.plot_surface(A, B, surf_limitada, cmap=cm.coolwarm,
-#                         linewidth=0, antialiased=False)
-# ax.set_zlabel('limitada')
+axs[1, 0].imshow(surf_limitada, cmap = 'gray')
+axs[1, 0].set_title('limitada')
+axs[1, 0].axes.get_xaxis().set_visible(False)
+axs[1, 0].axes.get_yaxis().set_visible(False)
 
-# ax = fig.add_subplot(2, 2, 2, projection='3d')
-# surf = ax.plot_surface(A, B, surf_drastica, cmap=cm.coolwarm,
-#                         linewidth=0, antialiased=False)
-# ax.set_zlabel('drastica')
+axs[1, 1].imshow(surf_drastica, cmap = 'gray')
+axs[1, 1].set_title('drastica')
+axs[1, 1].axes.get_xaxis().set_visible(False)
+axs[1, 1].axes.get_yaxis().set_visible(False)
 
 plt.savefig('fig/ex22.png')
 
