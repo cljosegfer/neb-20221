@@ -13,19 +13,27 @@ import matplotlib.pyplot as plt
 FS = sf.FuzzySystem()
 
 # antecedent
-S_1 = sf.FuzzySet(function = sf.Triangular_MF(a = -1, b = 0, c = 4.5), term = 'maximo')
+# S_1 = sf.FuzzySet(function = sf.Triangular_MF(a = -1, b = 0, c = 2), term = 'maximo')
 # S_2 = sf.FuzzySet(function = sf.Triangular_MF(a = 0, b = np.pi, c = 4.5), term = 'rooti')
-S_3 = sf.FuzzySet(function = sf.Triangular_MF(a = 0, b = 4.5, c = 2*np.pi), term = 'minimo')
+# S_3 = sf.FuzzySet(function = sf.Triangular_MF(a = 2, b = 4.5, c = 2*np.pi), term = 'minimo')
 # S_4 = sf.FuzzySet(function = sf.Triangular_MF(a = 4.5, b = 2*np.pi, c = 2*np.pi+1), term = 'roots')
 # FS.add_linguistic_variable('x', sf.LinguisticVariable([S_1, S_2, S_3, S_4], universe_of_discourse = [0, 2*np.pi]))
-FS.add_linguistic_variable('x', sf.LinguisticVariable([S_1, S_3], universe_of_discourse = [0, 2*np.pi]))
+# FS.add_linguistic_variable('x', sf.LinguisticVariable([S_1, S_3], universe_of_discourse = [0, 2*np.pi]))
+
+S_1 = sf.FuzzySet(function = sf.Triangular_MF(a = -1, b = 0, c = 4), term = 'maximo')
+S_2 = sf.FuzzySet(function = sf.Triangular_MF(a = 0, b = 4.5, c = 8), term = 'minimo')
+FS.add_linguistic_variable('x', sf.LinguisticVariable([S_1, S_2], universe_of_discourse = [0, 2*np.pi]))
 
 # consequent
-T_1 = sf.FuzzySet(function = sf.Triangular_MF(a = -1.22, b = -0.22, c = 1), term = 'MINIMO')
+# T_1 = sf.FuzzySet(function = sf.Triangular_MF(a = -1.22, b = -0.22, c = 1), term = 'MINIMO')
 # T_2 = sf.FuzzySet(function = sf.Triangular_MF(a = -0.22, b = 0, c = 1), term = 'ZERO')
-T_3 = sf.FuzzySet(function = sf.Triangular_MF(a = -0.22, b = 1, c = 2), term = 'MAXIMO')
+# T_3 = sf.FuzzySet(function = sf.Triangular_MF(a = -0.22, b = 1, c = 2), term = 'MAXIMO')
 # FS.add_linguistic_variable('y', sf.LinguisticVariable([T_1, T_2, T_3], universe_of_discourse = [-0.22, 1]))
-FS.add_linguistic_variable('y', sf.LinguisticVariable([T_1, T_3], universe_of_discourse = [-0.22, 1]))
+# FS.add_linguistic_variable('y', sf.LinguisticVariable([T_1, T_3], universe_of_discourse = [-0.22, 1]))
+
+T_1 = sf.FuzzySet(function = sf.Triangular_MF(a = -0.62, b = -0.22, c = -0.12), term = 'MINIMO')
+T_2 = sf.FuzzySet(function = sf.Triangular_MF(a = 0.9, b = 1, c = 1.1), term = 'MAXIMO')
+FS.add_linguistic_variable('y', sf.LinguisticVariable([T_1, T_2], universe_of_discourse = [-0.22, 1]))
 
 # rules
 RULE1 = 'IF (x IS maximo) THEN (y IS MAXIMO)'

@@ -14,16 +14,23 @@ FS = sf.FuzzySystem()
 
 # antecedent
 S_1 = sf.FuzzySet(function = sf.Triangular_MF(a = -3, b = -2, c = -1), term = 'doisn')
-S_2 = sf.FuzzySet(function = sf.Triangular_MF(a = -2, b = -1, c = 0), term = 'umn')
+S_2 = sf.FuzzySet(function = sf.Triangular_MF(a = -2, b = -1, c = -0.3), term = 'umn')
 S_3 = sf.FuzzySet(function = sf.Triangular_MF(a = -1, b = 0, c = 1), term = 'zero')
-S_4 = sf.FuzzySet(function = sf.Triangular_MF(a = 0, b = 1, c = 2), term = 'ump')
+S_4 = sf.FuzzySet(function = sf.Triangular_MF(a = 0.3, b = 1, c = 2), term = 'ump')
 S_5 = sf.FuzzySet(function = sf.Triangular_MF(a = 1, b = 2, c = 3), term = 'doisp')
+
+# sd = 0.3
+# S_1 = sf.FuzzySet(function = sf.Gaussian_MF(mu = -2, sigma = sd), term = 'doisn')
+# S_2 = sf.FuzzySet(function = sf.Gaussian_MF(mu = -1, sigma = sd), term = 'umn')
+# S_3 = sf.FuzzySet(function = sf.Gaussian_MF(mu = 0, sigma = sd+0.3), term = 'zero')
+# S_4 = sf.FuzzySet(function = sf.Gaussian_MF(mu = 1, sigma = sd), term = 'ump')
+# S_5 = sf.FuzzySet(function = sf.Gaussian_MF(mu = 2, sigma = sd), term = 'doisp')
 FS.add_linguistic_variable('x', sf.LinguisticVariable([S_1, S_2, S_3, S_4, S_5], universe_of_discourse = [-2, 2]))
 
 # consequent
-T_1 = sf.FuzzySet(function = sf.Triangular_MF(a = -1, b = 0, c = 1), term = 'ZERO')
-T_2 = sf.FuzzySet(function = sf.Triangular_MF(a = 0, b = 1, c = 2), term = 'UM')
-T_3 = sf.FuzzySet(function = sf.Triangular_MF(a = 1, b = 4, c = 5), term = 'QUATRO')
+T_1 = sf.FuzzySet(function = sf.Triangular_MF(a = -0.1, b = 0, c = 0.1), term = 'ZERO')
+T_2 = sf.FuzzySet(function = sf.Triangular_MF(a = 0.9, b = 1, c = 1.1), term = 'UM')
+T_3 = sf.FuzzySet(function = sf.Triangular_MF(a = 3.9, b = 4, c = 4.1), term = 'QUATRO')
 FS.add_linguistic_variable('y', sf.LinguisticVariable([T_1, T_2, T_3], universe_of_discourse = [0, 4]))
 
 # rules

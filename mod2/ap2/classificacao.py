@@ -59,6 +59,7 @@ FS.add_rules([RULE1, RULE2, RULE3, RULE4, RULE5])
 N = 100
 xx = np.linspace(-2, 2, N)
 yy = np.linspace(-2, 2, N)
+yy[::-1].sort()
 XX, YY = np.meshgrid(xx, yy)
 Z = np.zeros(shape = XX.shape)
 for i in range(N):
@@ -67,6 +68,7 @@ for i in range(N):
         y = YY[i, j]
         FS.set_variable('x', x)
         FS.set_variable('y', y)
+        # Z[i, j] = round(FS.Sugeno_inference(['z']).get('z'))
         Z[i, j] = FS.Sugeno_inference(['z']).get('z')
 plt.imshow(Z)
 plt.savefig('fig/classificacao.png')
