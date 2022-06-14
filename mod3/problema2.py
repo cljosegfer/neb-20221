@@ -38,7 +38,7 @@ for i in range(1, 6):
             ind += 1
 y_test = np.array([f(x) for x in X_test]).reshape(-1, 1)
 
-anfis
+# anfis
 n = 8
 model = anfis(n = n, m = X_train.shape[1])
 model.fit(X_train, y_train)

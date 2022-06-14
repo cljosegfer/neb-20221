@@ -8,6 +8,7 @@ Created on Tue May 24 12:05:32 2022
 
 import numpy as np
 import matplotlib.pyplot as plt
+from tqdm import tqdm
 
 class anfis:
     def __init__(self, n, m):
@@ -39,7 +40,7 @@ class anfis:
         
     def fit(self, X, y, max_epochs = 100, alpha = 0.01):
         self.log = []
-        for epoch in range(max_epochs):
+        for epoch in tqdm(range(max_epochs)):
             for i, x_i in enumerate(X):
                 yhat, Y, W, b = self.forward(x_i)
                 de_dyhat = yhat - y[i]
