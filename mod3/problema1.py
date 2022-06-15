@@ -8,6 +8,7 @@ Created on Tue May 24 14:34:52 2022
 
 import numpy as np
 from anfis import anfis
+from nfn import nfn
 import matplotlib.pyplot as plt
 
 # input
@@ -22,7 +23,7 @@ y_train = X_train ** 2
 # anfis
 n = 2
 model = anfis(n = n, m = X_train.shape[1])
-model.fit(X_train, y_train)
+model.fit(X_train, y_train, alpha = 0.1, max_epochs = 10)
 
 # eval
 yhat = model.predict(X_test).reshape(-1, 1)
@@ -31,6 +32,28 @@ epm = (np.abs(y_test - yhat) / yhat).mean()
 print('mse: {}, epm: {}'.format(mse, epm))
 
 # plot
+plt.figure()
+xx, yy = zip(*sorted(zip(X_test, yhat)))
+plt.plot(xx, yy)
+xx, yy = zip(*sorted(zip(X_test, y_test)))
+plt.plot(xx, yy)
+
+# log
+plt.figure()
+plt.plot(model.log)
+
+# nfn
+model = nfn(N = 100)
+model.fit(X_train, y_train, alpha = 0.1, max_epochs = 10)
+
+# eval
+yhat = model.predict(X_test).reshape(-1, 1)
+mse = model.mse(X_test, y_test)
+epm = (np.abs(y_test - yhat) / yhat).mean()
+print('mse: {}, epm: {}'.format(mse, epm))
+
+# plot
+plt.figure()
 xx, yy = zip(*sorted(zip(X_test, yhat)))
 plt.plot(xx, yy)
 xx, yy = zip(*sorted(zip(X_test, y_test)))

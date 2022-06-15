@@ -9,6 +9,7 @@ Created on Tue May 24 15:29:40 2022
 import numpy as np
 from anfis import anfis
 import matplotlib.pyplot as plt
+from nfn import nfn
 
 def f(x):
     return (1 + x[0]**(0.5) + x[1]**(-1) + x[2]**(-1.5))**2
@@ -38,20 +39,41 @@ for i in range(1, 6):
             ind += 1
 y_test = np.array([f(x) for x in X_test]).reshape(-1, 1)
 
-# anfis
-n = 8
-model = anfis(n = n, m = X_train.shape[1])
-model.fit(X_train, y_train)
+# # anfis
+# n = 8
+# model = anfis(n = n, m = X_train.shape[1])
+# model.fit(X_train, y_train, alpha = 0.01, max_epochs = 10)
 
-# report
+# # report
+# yhat = model.predict(X_test).reshape(-1, 1)
+# mse = model.mse(X_test, y_test)
+# epm = (np.abs(y_test - yhat) / yhat).mean()
+# print('mse: {}, epm: {}'.format(mse, epm))
+
+# # plot
+# plt.plot(y_test)
+# plt.plot(yhat)
+
+# # log
+# plt.figure()
+# plt.plot(model.log)
+
+# nfn
+model = nfn(N = 50)
+model.fit(X_train, y_train, alpha = 0.01, max_epochs = 10)
+
+# eval
 yhat = model.predict(X_test).reshape(-1, 1)
-mse = model.mse(X_test, y_test)
-epm = (np.abs(y_test - yhat) / yhat).mean()
-print('mse: {}, epm: {}'.format(mse, epm))
+# mse = model.mse(X_test, y_test)
+# epm = (np.abs(y_test - yhat) / yhat).mean()
+# print('mse: {}, epm: {}'.format(mse, epm))
 
-# plot
-plt.plot(y_test)
-plt.plot(yhat)
+# # plot
+# plt.figure()
+# xx, yy = zip(*sorted(zip(X_test, yhat)))
+# plt.plot(xx, yy)
+# xx, yy = zip(*sorted(zip(X_test, y_test)))
+# plt.plot(xx, yy)
 
 # log
 plt.figure()
