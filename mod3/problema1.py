@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 # input
 N = 100
-X_test = np.linspace(-2, 2, N).reshape(-1, 1)
+X_test = np.linspace(-1.95, 1.95, N).reshape(-1, 1)
 y_test = X_test ** 2
 
 # shuffle
@@ -44,7 +44,7 @@ plt.plot(model.log)
 
 # nfn
 model = nfn(N = 100)
-model.fit(X_train, y_train, alpha = 0.1, max_epochs = 10)
+model.fit(X_train, y_train, alpha = 0.1, max_epochs = 100)
 
 # eval
 yhat = model.predict(X_test).reshape(-1, 1)

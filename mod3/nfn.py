@@ -21,12 +21,12 @@ class nfn:
         self.minimo = None
         self.maximo = None
     
-    def forward(self, x, delta, index):
+    def forward(self, x, index):
         y = 0
         mu = np.zeros(len(x))
         for j, x_j in enumerate(x):
-            offset = (x_j // (2 * delta[j])) * 2 * delta[j]
-            reta = (x_j - offset) / delta[j]
+            offset = (x_j // (2 * self.delta[j])) * 2 * self.delta[j]
+            reta = (x_j - offset) / self.delta[j]
             if reta > 1:
                 reta = reta - 1
             mu[j] = reta
@@ -61,8 +61,14 @@ class nfn:
                 for j in range(m):
                     offset = (x_i[j] // (2 * self.delta[j])) * 2 * self.delta[j]
                     index.append(int((offset - self.minimo[j]) // (2 * self.delta[j])))
-                yhat, mu = self.forward(x_i, self.delta, index)
+                yhat, mu = self.forward(x_i, index)
                 de_dyhat = yhat - y[i]
+                
+                if alpha == 'auto':
+                    den = 0
+                    for j in range(m):
+                        den += mu[j]**2 + (1 - mu[j])**2
+                    alpha = 1/den
                 
                 for j in range(m):
                     dyhat_dw = mu[j]
@@ -76,7 +82,7 @@ class nfn:
                         self.w_s[j, indice + 1] = self.w_s[j, indice + 1] - alpha * de_dyhat * (1 - dyhat_dw)
                     except IndexError:
                         pass
-            # self.log.append(self.mse(X, y))
+            self.log.append(self.mse(X, y))
             
     def mse(self, X, y):
         yhat = self.predict(X).reshape(-1, 1)
@@ -90,6 +96,6 @@ class nfn:
             for j in range(m):
                 offset = (x_i[j] // (2 * self.delta[j])) * 2 * self.delta[j]
                 index.append(int((offset - self.minimo[j]) // (2 * self.delta[j])))
-            y, _ = self.forward(x_i, self.delta, index)
+            y, _ = self.forward(x_i, index)
             yhat.append(y)
         return np.array(yhat)
