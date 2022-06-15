@@ -9,6 +9,7 @@ Created on Tue May 24 15:05:39 2022
 import numpy as np
 from anfis import anfis
 import matplotlib.pyplot as plt
+from nfn import nfn
 
 def g(x):
     num = x[0] * x[1] * x[2] * x[4] * (x[2] - 1) + x[3]
@@ -68,6 +69,25 @@ y_train = y[fold]
 n = 15
 model = anfis(n = n, m = X_train.shape[1])
 model.fit(X_train, y_train, max_epochs = 10, alpha = 0.01)
+
+# report
+yhat = model.predict(X).reshape(-1, 1)
+mse = model.mse(X_test, y_test)
+epm = (np.abs(y - yhat) / yhat).mean()
+print('mse: {}, epm: {}'.format(mse, epm))
+
+# plot
+plt.figure()
+plt.plot(y)
+plt.plot(yhat)
+
+# log
+plt.figure()
+plt.plot(model.log)
+
+# nfn
+model = nfn(N = 4)
+model.fit(X_train, y_train, alpha = 0.01, max_epochs = 50)
 
 # report
 yhat = model.predict(X).reshape(-1, 1)

@@ -39,34 +39,34 @@ for i in range(1, 6):
             ind += 1
 y_test = np.array([f(x) for x in X_test]).reshape(-1, 1)
 
-# # anfis
-# n = 8
-# model = anfis(n = n, m = X_train.shape[1])
-# model.fit(X_train, y_train, alpha = 0.01, max_epochs = 60)
+# anfis
+n = 8
+model = anfis(n = n, m = X_train.shape[1])
+model.fit(X_train, y_train, alpha = 0.01, max_epochs = 60)
 
-# # report
-# yhat = model.predict(X_test).reshape(-1, 1)
-# mse = model.mse(X_test, y_test)
-# epm = (np.abs(y_test - yhat) / yhat).mean()
-# print('mse: {}, epm: {}'.format(mse, epm))
+# report
+yhat = model.predict(X_test).reshape(-1, 1)
+mse = model.mse(X_test, y_test)
+epm = (np.abs(y_test - yhat) / yhat).mean()
+print('mse: {}, epm: {}'.format(mse, epm))
 
-# # plot
-# plt.figure()
-# plt.plot(y_test)
-# plt.plot(yhat)
+# plot
+plt.figure()
+plt.plot(y_test)
+plt.plot(yhat)
 
-# # log
-# plt.figure()
-# plt.plot(model.log)
+# log
+plt.figure()
+plt.plot(model.log)
 
 # nfn
-model = nfn(N = 1)
-model.fit(X_train, y_train, alpha = 'auto', max_epochs = 500)
+model = nfn(N = 4)
+model.fit(X_train, y_train, alpha = 0.01, max_epochs = 50)
 
 # eval
 yhat = model.predict(X_test).reshape(-1, 1)
 mse = model.mse(X_test, y_test)
-epm = (np.abs(y_test - yhat) / yhat).mean()
+epm = (np.abs(y_test - yhat) / (yhat + 0.1)).mean()
 print('mse: {}, epm: {}'.format(mse, epm))
 
 # plot
