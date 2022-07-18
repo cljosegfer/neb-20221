@@ -20,7 +20,7 @@ X = data.drop(columns = 'accent').values
 y = data.accent.values
 
 # kfold
-kf = KFold(n_splits = 10)
+kf = KFold(n_splits = 10, shuffle = True)
 for idx, [train_index, test_index] in enumerate(kf.split(X)):
     # train / test
     X_train = X[train_index]
