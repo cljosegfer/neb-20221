@@ -13,11 +13,13 @@ from scipy.io import savemat
 
 # read
 data_path = 'data'
-ds = 'comvoi-en.csv'
+ds = 'cefala.csv'
 data = pd.read_csv('{}/{}'.format(data_path, ds))
 
-X = data.drop(columns = 'accent').values
-y = data.accent.values
+# X = data.drop(columns = 'accent').values
+# y = data.accent.values
+X = data.iloc[:, 0:39].values
+y = data.iloc[:, 39].values
 
 # kfold
 kf = KFold(n_splits = 10, shuffle = True)
